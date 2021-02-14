@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="ru.job4j.dream.store.Store" %>
 <%@ page import="ru.job4j.dream.model.Post" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -33,13 +34,22 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th scope="col">Названия</th>
+                        <th scope="col">Id</th>
+                        <th scope="col">Название вакансии</th>
+                        <th scope="col">Описание</th>
+                        <th scope="col">Дата создания</th>
                     </tr>
                     </thead>
                     <tbody>
                     <% for (Post post : Store.instOf().findAllPosts()) { %>
                     <tr>
+                        <th scope="row"><%= post.getId()%>
+                        </th>
                         <td><%= post.getName() %>
+                        </td>
+                        <td><%= post.getDescription() %>
+                        </td>
+                        <td><%= new SimpleDateFormat("dd.MM.yy HH:mm").format(post.getCreated().getTime()) %>
                         </td>
                     </tr>
                     <% } %>
