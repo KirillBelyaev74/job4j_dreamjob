@@ -6,13 +6,13 @@ import java.util.Collection;
 import java.util.GregorianCalendar;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Store {
 
     private static final Store INST = new Store();
-
+    private static AtomicInteger POST_ID = new AtomicInteger(4);
     private final Map<Integer, Post> posts = new ConcurrentHashMap<>();
-
     private final Map<Integer, Candidate> candidates = new ConcurrentHashMap<>();
 
     private Store() {
@@ -26,6 +26,12 @@ public class Store {
 
     public static Store instOf() {
         return INST;
+    }
+
+    public void save(Post post) {
+        int id = POST_ID.incrementAndGet();
+        post.setId(id);
+        posts.put(id, post);
     }
 
     public Collection<Post> findAllPosts() {
