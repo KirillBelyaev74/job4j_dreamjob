@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="ru.job4j.dream.store.Store" %>
 <%@ page import="ru.job4j.dream.model.Post" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Collection" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -28,7 +28,7 @@
 <body>
 <div class="container pt-3">
     <li class="nav-item">
-        <a class="nav-link" href="<%=request.getContextPath()%>/index.jsp">Главная</a>
+        <a class="nav-link" href="<%=request.getContextPath()%>/index.do">Главная</a>
     </li>
     <div class="row">
         <div class="card" style="width: 100%">
@@ -45,7 +45,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <% for (Post post : Store.instOf().findAllPosts()) { %>
+                    <% for (Post post : (Collection<Post>) request.getAttribute("posts")) { %>
                     <tr>
                         <td><a href="<%=request.getContextPath()%>/post/edit.jsp?id=<%=post.getId()%>">
                             <i class="fa fa-edit mr-3"></i>

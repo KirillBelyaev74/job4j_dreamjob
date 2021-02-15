@@ -30,7 +30,7 @@
 %>
 <div class="container pt-3">
     <li class="nav-item">
-        <a class="nav-link" href="<%=request.getContextPath()%>/index.jsp">Главная</a>
+        <a class="nav-link" href="<%=request.getContextPath()%>/index.do">Главная</a>
     </li>
     <div class="row">
         <div class="card" style="width: 100%">
@@ -42,7 +42,7 @@
                 <% } %>
             </div>
             <div class="card-body">
-                <form action="<%=request.getContextPath()%>/post/save?id=<%=post.getId()%>" method="post">
+                <form action="<%=request.getContextPath()%>/posts.do?id=<%=post.getId()%>" method="post">
                     <div class="form-group">
                         <label>Название вакансии</label>
                         <input type="text" class="form-control" name="name" value="<%=post.getName()%>">
