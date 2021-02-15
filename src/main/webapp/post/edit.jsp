@@ -1,3 +1,5 @@
+<%@ page import="ru.job4j.dream.store.Store" %>
+<%@ page import="ru.job4j.dream.model.Post" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <!doctype html>
 <html lang="en">
@@ -19,17 +21,31 @@
     <title>Работа мечты</title>
 </head>
 <body>
+<%
+    String id = request.getParameter("id");
+    Post post = new Post(0, "", "", null);
+    if (id != null) {
+        post = Store.instOf().getPostById(Integer.parseInt(id));
+    }
+%>
 <div class="container pt-3">
+    <li class="nav-item">
+        <a class="nav-link" href="<%=request.getContextPath()%>/index.jsp">Главная</a>
+    </li>
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
+                <% if (id == null) { %>
                 Новая вакансия
+                <% } else { %>
+                Редактирование вакансии
+                <% } %>
             </div>
             <div class="card-body">
-                <form action="<%=request.getContextPath()%>/post/save" method="post">
+                <form action="<%=request.getContextPath()%>/post/save?id=<%=post.getId()%>" method="post">
                     <div class="form-group">
-                        <label>Имя Вакансии</label>
-                        <input type="text" class="form-control" name="name">
+                        <label>Название вакансии</label>
+                        <input type="text" class="form-control" name="name" value="<%=post.getName()%>">
                     </div>
                     <button type="submit" class="btn btn-primary">Сохранить</button>
                 </form>

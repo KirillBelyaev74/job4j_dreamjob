@@ -30,15 +30,25 @@ public class Store {
     }
 
     public void savePost(Post post) {
-        int id = POST_ID.incrementAndGet();
-        post.setId(id);
-        posts.put(id, post);
+        if (post.getId() == 0) {
+            post.setId(POST_ID.getAndIncrement());
+        }
+        posts.put(post.getId(), post);
+    }
+
+    public Post getPostById(int id) {
+        return posts.get(id);
     }
 
     public void saveCandidates(Candidate candidate) {
-        int id = CANDIDATE_ID.incrementAndGet();
-        candidate.setId(id);
-        candidates.put(id, candidate);
+        if (candidate.getId() == 0) {
+            candidate.setId(CANDIDATE_ID.getAndIncrement());
+        }
+        candidates.put(candidate.getId(), candidate);
+    }
+
+    public Candidate getCandidateById(int id) {
+        return candidates.get(id);
     }
 
     public Collection<Post> findAllPosts() {
