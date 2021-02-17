@@ -1,15 +1,15 @@
 package ru.job4j.dream.model;
 
-import java.util.Calendar;
+import java.util.Date;
 import java.util.Objects;
 
 public class Post {
     private int id;
     private String name;
     private String description;
-    private Calendar created;
+    private Date created;
 
-    public Post(int id, String name, String description, Calendar created) {
+    public Post(int id, String name, String description, Date created) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -40,11 +40,11 @@ public class Post {
         this.description = description;
     }
 
-    public Calendar getCreated() {
+    public Date getCreated() {
         return created;
     }
 
-    public void setCreated(Calendar created) {
+    public void setCreated(Date created) {
         this.created = created;
     }
 

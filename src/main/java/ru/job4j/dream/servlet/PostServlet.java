@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class PostServlet extends HttpServlet {
@@ -26,7 +27,7 @@ public class PostServlet extends HttpServlet {
                         Integer.parseInt(req.getParameter("id")),
                         req.getParameter("name"),
                         req.getParameter("description"),
-                        new GregorianCalendar()));
+                        new Date()));
         resp.sendRedirect(req.getContextPath() + "/posts.jsp");
     }
 }

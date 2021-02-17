@@ -1,7 +1,7 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="ru.job4j.dream.model.Post" %>
-<%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="java.util.Collection" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -45,21 +45,17 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <% for (Post post : (Collection<Post>) request.getAttribute("posts")) { %>
-                    <tr>
-                        <td><a href="<%=request.getContextPath()%>/post/edit.jsp?id=<%=post.getId()%>">
-                            <i class="fa fa-edit mr-3"></i>
-                        </a></td>
-                        <td><%= post.getId()%>
-                        </td>
-                        <td><%= post.getName() %>
-                        </td>
-                        <td><%= post.getDescription() %>
-                        </td>
-                        <td><%= new SimpleDateFormat("dd.MM.yy HH:mm").format(post.getCreated().getTime()) %>
-                        </td>
-                    </tr>
-                    <% } %>
+                    <c:forEach items="${posts}" var="post">
+                        <tr>
+                            <td><a href='<c:url value="/post/edit.jsp?id=${post.id}"/>'>
+                                    <i class="fa fa-edit mr-3"></i>
+                            </a></td>
+                            <td><c:out value="${post.id}"/></td>
+                            <td><c:out value="${post.name}"/></td>
+                            <td><c:out value="${post.description}"/></td>
+                            <td><fmt:formatDate value="${post.created}" pattern="dd.MM.yy HH:mm"/></td>
+                        </tr>
+                    </c:forEach>
                     </tbody>
                 </table>
             </div>
