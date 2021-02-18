@@ -53,7 +53,7 @@
                             <td><c:out value="${post.id}"/></td>
                             <td><c:out value="${post.name}"/></td>
                             <td><c:out value="${post.description}"/></td>
-                            <td><fmt:formatDate value="${post.created}" pattern="dd.MM.yy HH:mm"/></td>
+                            <td><fmt:formatDate value="${post.created}" pattern="dd.MM.yy"/></td>
                         </tr>
                     </c:forEach>
                     </tbody>
