@@ -27,6 +27,10 @@
 </head>
 <body>
 <div class="container pt-3">
+    <c:set var="userName" value="${user.name}" />
+    <c:if test="${userName != null}">
+        <p align="right">Добро пожаловать, ${userName}</p>
+    </c:if>
     <a href="<c:url value='/index.do'/>">Главная</a>
     <div class="row">
         <div class="card" style="width: 100%">
