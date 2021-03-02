@@ -8,6 +8,12 @@ create table candidates(
     id serial primary key,
     name varchar(50));
 
+create table photoCandidate(
+    candidate_id int references candidates(id),
+    pathPhoto text not null);
+
 drop table posts;
 
 drop table candidates;
+
+drop table photoCandidate;

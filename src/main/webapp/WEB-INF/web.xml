@@ -16,6 +16,22 @@
     <servlet-name>IndexServlet</servlet-name>
     <servlet-class>ru.job4j.dream.servlet.IndexServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>UploadServlet</servlet-name>
+    <servlet-class>ru.job4j.dream.servlet.UploadServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ShowPhotoCandidates</servlet-name>
+    <servlet-class>ru.job4j.dream.servlet.ShowPhotoCandidates</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>DeleteCandidate</servlet-name>
+    <servlet-class>ru.job4j.dream.servlet.DeleteCandidate</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>DeletePost</servlet-name>
+    <servlet-class>ru.job4j.dream.servlet.DeletePost</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>PostServlet</servlet-name>
     <url-pattern>/posts.do</url-pattern>
@@ -27,5 +43,21 @@
   <servlet-mapping>
     <servlet-name>IndexServlet</servlet-name>
     <url-pattern>/index.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UploadServlet</servlet-name>
+    <url-pattern>/upload</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ShowPhotoCandidates</servlet-name>
+    <url-pattern>/show</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>DeleteCandidate</servlet-name>
+    <url-pattern>/deleteCandidate</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>DeletePost</servlet-name>
+    <url-pattern>/deletePost</url-pattern>
   </servlet-mapping>
 </web-app>

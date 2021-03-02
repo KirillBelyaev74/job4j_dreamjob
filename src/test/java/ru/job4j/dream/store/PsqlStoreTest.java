@@ -19,19 +19,19 @@ public class PsqlStoreTest {
         List<Post> posts = new ArrayList<>(store.findAllPosts());
         assertThat(posts.get(0).getName(), is("One"));
         assertThat(posts.get(1).getName(), is("Two"));
-        assertThat(store.getPostById(1).getName(), is("One"));
+        assertThat(store.getPostById("1").getName(), is("One"));
     }
 
     @Test
     public void whenAddCandidatesAndGetAllTheCandidatesAndCandidateById() {
         Store store = PsqlStore.instOf();
-        Candidate one = new Candidate(0, "1");
-        Candidate two = new Candidate(0, "2");
+        Candidate one = new Candidate(0, "1", -1);
+        Candidate two = new Candidate(0, "2", -1);
         store.saveCandidates(one);
         store.saveCandidates(two);
         List<Candidate> candidates = new ArrayList<>(store.findAllCandidates());
         assertThat(candidates.get(0).getName(), is("1"));
         assertThat(candidates.get(1).getName(), is("2"));
-        assertThat(store.getCandidateById(1).getName(), is("1"));
+        assertThat(store.getCandidateById("1").getName(), is("1"));
     }
 }

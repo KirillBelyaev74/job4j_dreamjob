@@ -1,3 +1,5 @@
+<%@ page import="ru.job4j.dream.store.Store" %>
+<%@ page import="ru.job4j.dream.store.PsqlStore" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
@@ -27,9 +29,7 @@
 </head>
 <body>
 <div class="container pt-3">
-    <li class="nav-item">
-        <a class="nav-link" href="<%=request.getContextPath()%>/index.do">Главная</a>
-    </li>
+    <a href="<c:url value='/index.do'/>">Главная</a>
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">Вакансии</div>
@@ -54,6 +54,7 @@
                             <td><c:out value="${post.name}"/></td>
                             <td><c:out value="${post.description}"/></td>
                             <td><fmt:formatDate value="${post.created}" pattern="dd.MM.yy"/></td>
+                            <td><a href="<c:url value='/deletePost?id=${post.id}'/>">Удалить вакансию</a></td>
                         </tr>
                     </c:forEach>
                     </tbody>
