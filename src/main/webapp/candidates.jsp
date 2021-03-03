@@ -1,4 +1,3 @@
-<%@ page import="ru.job4j.dream.store.PsqlStore" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %>
@@ -29,7 +28,7 @@
 <div class="container pt-3">
     <c:set var="userName" value="${user.name}" />
     <c:if test="${userName != null}">
-        <p align="right">Добро пожаловать, ${userName}</p>
+        <p align="right"><a class="nav-link" href="<%=request.getContextPath()%>/leave.do">${user.name} | Выйти</a></p>
     </c:if>
     <a href="<c:url value='/index.do'/>">Главная</a>
     <div class="row">

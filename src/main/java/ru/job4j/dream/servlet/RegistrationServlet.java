@@ -1,30 +1,27 @@
 package ru.job4j.dream.servlet;
 
 import ru.job4j.dream.model.User;
+import ru.job4j.dream.store.PsqlStore;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-public class AuthServlet extends HttpServlet {
+public class RegistrationServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String name = req.getParameter("name");
         String email = req.getParameter("email");
         String password = req.getParameter("password");
-        if ("kirill@".equals(email) && "kirill".equals(password)) {
-            HttpSession httpSession = req.getSession();
-            User user = new User();
-            user.setName("Admin");
-            user.setEmail(email);
-            user.setPassword(password);
-            httpSession.setAttribute("user", user);
-            resp.sendRedirect(req.getContextPath() + "/posts.do");
+        if (name.equals("") || email.equals("") || password.equals("")) {
+            req.setAttribute("error", "Введите все данные!");
+            req.getRequestDispatcher("registration.jsp").forward(req, resp);
         } else {
-            req.setAttribute("error", "Не верный email или пароль");
+            User user = new User(name, email, password);
+            PsqlStore.instOf().addUser(user);
             req.getRequestDispatcher("login.jsp").forward(req, resp);
         }
     }

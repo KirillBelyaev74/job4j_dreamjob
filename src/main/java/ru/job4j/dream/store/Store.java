@@ -2,6 +2,8 @@ package ru.job4j.dream.store;
 
 import ru.job4j.dream.model.Candidate;
 import ru.job4j.dream.model.Post;
+import ru.job4j.dream.model.User;
+
 import java.util.Collection;
 import java.util.Map;
 
@@ -28,4 +30,8 @@ public interface Store {
     Map<Integer, String> findAllPhotoCandidates();
 
     String getPhotoCandidate(String stringId);
+
+    User addUser(User user);
+
+    User getUser(String email, String password);
 }

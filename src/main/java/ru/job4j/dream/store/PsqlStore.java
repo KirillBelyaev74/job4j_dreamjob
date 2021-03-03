@@ -4,6 +4,7 @@ import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.log4j.Logger;
 import ru.job4j.dream.model.Candidate;
 import ru.job4j.dream.model.Post;
+import ru.job4j.dream.model.User;
 
 import java.io.*;
 import java.sql.*;
@@ -357,5 +358,51 @@ public class PsqlStore implements Store {
             LOGGER.error("Method deletePhotoCandidate " + throwables);
         }
         LOGGER.debug("Deleted photo of the candidate by id " + id);
+    }
+
+    @Override
+    public User addUser(User user) {
+        LOGGER.debug("Received argument user " + user.toString());
+        try (Connection connection = pool.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "insert into consumers(name, email, password) values (initcap(?), lower(?), ?)",
+                    PreparedStatement.RETURN_GENERATED_KEYS)) {
+            preparedStatement.setString(1, user.getName());
+            preparedStatement.setString(2, user.getEmail());
+            preparedStatement.setString(3, user.getPassword());
+            preparedStatement.executeQuery();
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
+            if (resultSet.next()) {
+                user.setId(resultSet.getInt(1));
+            }
+        } catch (SQLException throwables) {
+            LOGGER.error("Method addUser " + throwables);
+        }
+        LOGGER.debug("Returned user " + user.toString());
+        return user;
+    }
+
+    @Override
+    public User getUser(String email, String password) {
+        LOGGER.debug("Received arguments email " + email + " and password" + password);
+        User user = null;
+        try (Connection connection = pool.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "select * from consumers where email = lower(?) and password = ?")) {
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, password);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                user = new User(
+                        resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("email"),
+                        resultSet.getString("password"));
+            }
+        } catch (SQLException throwables) {
+            LOGGER.error("Method getUser " + throwables);
+        }
+        LOGGER.debug("Returned user " + user.toString());
+        return user;
     }
 }

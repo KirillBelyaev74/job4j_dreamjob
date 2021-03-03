@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %>
 <!doctype html>
 <html lang="en">
@@ -35,9 +36,19 @@
             <li class="nav-item">
                 <a class="nav-link" href="<%=request.getContextPath()%>/candidate/edit.jsp">Добавить кандидата</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<%=request.getContextPath()%>/login.jsp"> ${user.name} | Войти</a>
-            </li>
+            <c:if test="${user.name == null}">
+                <li class="nav-item">
+                    <a class="nav-link" href="<%=request.getContextPath()%>/registration.jsp">Зарегистрироваться</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<%=request.getContextPath()%>/login.jsp">Войти</a>
+                </li>
+            </c:if>
+            <c:if test="${user.name != null}">
+                <li class="nav-item">
+                    <a class="nav-link" href="<%=request.getContextPath()%>/leave.do">${user.name} | Выйти</a>
+                </li>
+            </c:if>
         </ul>
     </div>
     <div class="row">

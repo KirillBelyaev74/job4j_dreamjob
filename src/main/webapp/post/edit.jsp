@@ -1,6 +1,8 @@
 <%@ page import="ru.job4j.dream.store.PsqlStore" %>
 <%@ page import="ru.job4j.dream.model.Post" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -32,6 +34,10 @@
     }
 %>
 <div class="container pt-3">
+    <c:set var="userName" value="${user.name}" />
+    <c:if test="${userName != null}">
+        <p align="right"><a class="nav-link" href="<%=request.getContextPath()%>/leave.do">${userName} | Выйти</a></p>
+    </c:if>
     <a class="nav-link" href="<%=request.getContextPath()%>/index.do">Главная</a>
     <div class="row">
         <div class="card" style="width: 100%">
