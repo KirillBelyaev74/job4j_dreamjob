@@ -25,8 +25,8 @@ public class PsqlStoreTest {
     @Test
     public void whenAddCandidatesAndGetAllTheCandidatesAndCandidateById() {
         Store store = PsqlStore.instOf();
-        Candidate one = new Candidate(0, "1", -1);
-        Candidate two = new Candidate(0, "2", -1);
+        Candidate one = new Candidate(0, "1",0);
+        Candidate two = new Candidate(0, "2", 0);
         store.saveCandidates(one);
         store.saveCandidates(two);
         List<Candidate> candidates = new ArrayList<>(store.findAllCandidates());

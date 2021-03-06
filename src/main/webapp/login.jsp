@@ -31,7 +31,7 @@
                 Авторизация
             </div>
             <c:if test="${error != null}">
-                <p><c:out value="${error}"/></p>
+                <div align="center"><c:out value="${error}"/></div>
             </c:if>
             <div class="card-body">
                 <form action="<%=request.getContextPath()%>/login.do" method="post">

@@ -34,4 +34,6 @@ public interface Store {
     User addUser(User user);
 
     User getUser(String email, String password);
+
+    boolean checkLiveUser(String email);
 }

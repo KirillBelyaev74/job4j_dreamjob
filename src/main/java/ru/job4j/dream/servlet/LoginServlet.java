@@ -15,12 +15,17 @@ public class LoginServlet extends HttpServlet {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
         if (email.equals("") || password.equals("")) {
-            req.setAttribute("error", "Введите все данные");
+            req.setAttribute("error", "Введите все данные!");
             req.getRequestDispatcher("login.jsp").forward(req, res);
-        } else {
-            User user = PsqlStore.instOf().getUser(email, password);
+        }
+        User user = PsqlStore.instOf().getUser(email, password);
+        if (user != null && user.getEmail().equalsIgnoreCase(email) && user.getPassword().equalsIgnoreCase(password)) {
             req.getSession().setAttribute("user", user);
             res.sendRedirect(req.getContextPath() + "/index.do");
+        } else {
+            req.setAttribute("error", "Такого пользователя не существует!");
+            req.getRequestDispatcher("login.jsp").forward(req, res);
         }
+
     }
 }

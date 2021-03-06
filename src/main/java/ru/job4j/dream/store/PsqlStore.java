@@ -140,7 +140,7 @@ public class PsqlStore implements Store {
         } catch (SQLException throwables) {
             LOGGER.error("Method getPostById " + throwables);
         }
-        LOGGER.debug("Returned post " + post.toString());
+        LOGGER.debug("Returned post " + post);
         return post;
     }
 
@@ -254,7 +254,7 @@ public class PsqlStore implements Store {
         } catch (SQLException throwables) {
             LOGGER.error("Method getCandidateById " + throwables);
         }
-        LOGGER.debug("Returned candidate " + candidate.toString());
+        LOGGER.debug("Returned candidate " + candidate);
         return candidate;
     }
 
@@ -364,9 +364,9 @@ public class PsqlStore implements Store {
     public User addUser(User user) {
         LOGGER.debug("Received argument user " + user.toString());
         try (Connection connection = pool.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(
-                    "insert into consumers(name, email, password) values (initcap(?), lower(?), ?)",
-                    PreparedStatement.RETURN_GENERATED_KEYS)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "insert into consumers(name, email, password) values (initcap(?), lower(?), ?)",
+                     PreparedStatement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, user.getName());
             preparedStatement.setString(2, user.getEmail());
             preparedStatement.setString(3, user.getPassword());
@@ -387,22 +387,39 @@ public class PsqlStore implements Store {
         LOGGER.debug("Received arguments email " + email + " and password" + password);
         User user = null;
         try (Connection connection = pool.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(
-                    "select * from consumers where email = lower(?) and password = ?")) {
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "select * from consumers where email = lower(?) and password = ?")) {
             preparedStatement.setString(1, email);
             preparedStatement.setString(2, password);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                user = new User(
-                        resultSet.getInt("id"),
-                        resultSet.getString("name"),
-                        resultSet.getString("email"),
-                        resultSet.getString("password"));
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    user = new User(
+                            resultSet.getInt("id"),
+                            resultSet.getString("name"),
+                            resultSet.getString("email"),
+                            resultSet.getString("password"));
+                }
             }
         } catch (SQLException throwables) {
             LOGGER.error("Method getUser " + throwables);
         }
-        LOGGER.debug("Returned user " + user.toString());
+        LOGGER.debug("Returned user " + user);
         return user;
+    }
+
+    @Override
+    public boolean checkLiveUser(String email) {
+        boolean result = false;
+        try (Connection connection = pool.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "select * from consumers where email = lower(?)")) {
+            preparedStatement.setString(1, email);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                result = resultSet.next();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return result;
     }
 }
