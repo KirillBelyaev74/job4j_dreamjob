@@ -19,7 +19,7 @@ public class LoginServlet extends HttpServlet {
             req.getRequestDispatcher("login.jsp").forward(req, res);
         }
         User user = PsqlStore.instOf().getUser(email, password);
-        if (user != null && user.getEmail().equalsIgnoreCase(email) && user.getPassword().equalsIgnoreCase(password)) {
+        if (user != null) {
             req.getSession().setAttribute("user", user);
             res.sendRedirect(req.getContextPath() + "/index.do");
         } else {
