@@ -9,54 +9,56 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script>
         function validate() {
-            const name = document.getElementById("name").value;
-            const surname = document.getElementById("surname").value;
-            const description = document.getElementById("description").value;
+            let name = document.getElementById("name").value;
+            let surname = document.getElementById("surname").value;
+            let description = document.getElementById("description").value;
             if (name === '' || surname === '' || description === '') {
-                alert("Введите все данные")
+                alert("Введите все данные");
+            } else {
+                addRow(name, surname, description);
             }
+        }
+        function addRow(name, surname, description) {
+            $('#tableUsers tr:last').after("<tr>\n" +
+                "<th>" + name + "</th>\n" +
+                "<th>" + surname + "</th>\n" +
+                "<th>" + description + "</th>\n" +
+                "</tr>")
         }
     </script>
 </head>
 <body>
 
 <div class="container-fluid"><br>
-    <div class="form-group">
-        <label for="name">Имя</label>
-        <input type="text" class="form-control" id="name">
-    </div>
-    <div class="form-group">
-        <label for="surname">Фамилия</label>
-        <input type="text" class="form-control" id="surname">
-    </div>
-    <div class="form-group">
-        <label for="description">Описание</label>
-        <input type="text" class="form-control" id="description">
-    </div>
-    <form>
-        <input type="radio" name="gender" value="male" checked>Мужской<br>
-        <input type="radio" name="gender" value="female">Женский<br><br>
+    <form method="post">
+        <div class="form-group">
+            <label for="name">Имя</label>
+            <input type="text" class="form-control" id="name">
+        </div>
+        <div class="form-group">
+            <label for="surname">Фамилия</label>
+            <input type="text" class="form-control" id="surname">
+        </div>
+        <div class="form-group">
+            <label for="description">Описание</label>
+            <input type="text" class="form-control" id="description">
+        </div>
+        <div>
+            <input type="radio" name="gender" value="male" checked>Мужской<br>
+            <input type="radio" name="gender" value="female">Женский<br><br>
+        </div>
+        <button type="reset" class="btn btn-primary" onclick="validate();">Отправить</button>
+        <br><br>
     </form>
-    <button type="submit" class="btn btn-primary" onclick="validate();">Отправить</button>
-    <br><br>
 </div>
-<table class="table">
-    <thead>
-    <tr>
-        <th>Имя</th>
-        <th>Фамилия</th>
-        <th>Пол</th>
-        <th>Описание</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    </tbody>
-</table>
+<div>
+    <table class="table" id="tableUsers">
+        <tr>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Описание</th>
+        </tr>
+    </table>
+</div>
 </body>
 </html>
