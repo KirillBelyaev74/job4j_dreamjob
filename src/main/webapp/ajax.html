@@ -12,14 +12,14 @@
 
 <script>
     function sendGreeting() {
-        let email = $('#exampleInputEmail1').val();
+        let data = $('#exampleInputEmail1').val();
         $.ajax({
             type: 'GET',
             url: 'http://localhost:8080/job4j_dreamjob/greet',
-            data: 'name=' + email,
-            dataType: 'text'
+            data: {name: data},
+            dataType: 'json'
         }).done(function (data) {
-            $('#out').after(data);
+            $('#out').before(JSON.stringify(data));
         }).fail(function (err) {
             alert(err);
         });
