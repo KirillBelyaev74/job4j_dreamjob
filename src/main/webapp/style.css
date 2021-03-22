@@ -1,9 +1,11 @@
 .messageError {
     font-size: 20px;
     color: #ff0000;
+    text-align: center;
 }
 
 .message {
     font-size: 20px;
     color: #008000;
+    text-align: center;
 }

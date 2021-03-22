@@ -44,6 +44,10 @@
     <servlet-name>LeaveServlet</servlet-name>
     <servlet-class>ru.job4j.dream.servlet.LeaveServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>CitiesServlet</servlet-name>
+    <servlet-class>ru.job4j.dream.servlet.CitiesServlet</servlet-class>
+  </servlet>
 
   <servlet-mapping>
     <servlet-name>PostServlet</servlet-name>
@@ -85,6 +89,10 @@
     <servlet-name>LeaveServlet</servlet-name>
     <url-pattern>/leave.do</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CitiesServlet</servlet-name>
+    <url-pattern>/cities</url-pattern>
+  </servlet-mapping>
 
   <filter>
     <filter-name>AuthFilter</filter-name>
@@ -93,5 +101,13 @@
   <filter-mapping>
     <filter-name>AuthFilter</filter-name>
     <url-pattern>*.do</url-pattern>
+  </filter-mapping>
+  <filter>
+    <filter-name>CORSFilter</filter-name>
+    <filter-class>ru.job4j.dream.filter.CORSFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>CORSFilter</filter-name>
+    <url-pattern>*</url-pattern>
   </filter-mapping>
 </web-app>
