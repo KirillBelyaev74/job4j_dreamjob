@@ -1,0 +1,9 @@
+.messageError {
+    font-size: 20px;
+    color: #ff0000;
+}
+
+.message {
+    font-size: 20px;
+    color: #008000;
+}

@@ -19,33 +19,51 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
             crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css"/>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+        function validateUser() {
+            let name = $("#name").val();
+            let email = $("#email").val();
+            let password = $("#password").val();
+            if (name === '' || email === '' || password === '') {
+                alert("Введите все данные!")
+            }
+        }
+    </script>
     <title>Работа мечты</title>
 </head>
 <body>
 <div class="container pt-3">
+    <div>
+        <a href="<c:url value='/index.do'/>">Главная</a>
+    </div>
+    <div>
+        <a href="<%=request.getContextPath()%>/login.jsp">Войти</a>
+    </div>
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
                 Регистрация
             </div>
-            <c:if test="${error != null}">
-                <div align="center"><c:out value="${error}"/></div>
+            <c:if test="${message != null}">
+                <div class="messageError"><c:out value="${message}"/></div>
             </c:if>
             <div class="card-body">
                 <form action="<%=request.getContextPath()%>/registration.do" method="post">
                     <div class="form-group">
                         <label>Имя</label>
-                        <input type="text" class="form-control" name="name">
+                        <input type="text" class="form-control" name="name" id="name">
                     </div>
                     <div class="form-group">
                         <label>Почта</label>
-                        <input type="text" class="form-control" name="email">
+                        <input type="text" class="form-control" name="email" id="email">
                     </div>
                     <div class="form-group">
                         <label>Пароль</label>
-                        <input type="text" class="form-control" name="password">
+                        <input type="text" class="form-control" name="password" id="password">
                     </div>
-                    <button type="submit" class="btn btn-primary">Войти</button>
+                    <button type="submit" class="btn btn-primary" onclick="validateUser()">Войти</button>
                 </form>
             </div>
         </div>

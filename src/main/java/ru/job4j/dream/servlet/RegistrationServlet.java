@@ -1,8 +1,8 @@
 package ru.job4j.dream.servlet;
 
 import ru.job4j.dream.model.User;
-import ru.job4j.dream.store.PsqlStore;
-import ru.job4j.dream.store.Store;
+import ru.job4j.dream.store.PsqlUser;
+import ru.job4j.dream.store.StoreUser;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,16 +17,16 @@ public class RegistrationServlet extends HttpServlet {
         String name = req.getParameter("name");
         String email = req.getParameter("email");
         String password = req.getParameter("password");
-        Store store = PsqlStore.instOf();
+        StoreUser store = PsqlUser.instOf();
         if (name.equals("") || email.equals("") || password.equals("")) {
-            req.setAttribute("error", "Введите все данные!");
             req.getRequestDispatcher("registration.jsp").forward(req, resp);
         } else if (store.checkLiveUser(email)) {
-            req.setAttribute("error", "Такой пользователь уже существует!");
+            req.setAttribute("message", "Такой пользователь уже существует!");
             req.getRequestDispatcher("registration.jsp").forward(req, resp);
         } else {
             User user = new User(name, email, password);
-            PsqlStore.instOf().addUser(user);
+            PsqlUser.instOf().saveUser(user);
+            req.setAttribute("message", "Регистрация прошла успешно!");
             req.getRequestDispatcher("login.jsp").forward(req, resp);
         }
     }

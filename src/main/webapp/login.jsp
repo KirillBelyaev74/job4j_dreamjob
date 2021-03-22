@@ -20,6 +20,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
             crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css"/>
 
     <title>Работа мечты</title>
 </head>
@@ -30,8 +31,8 @@
             <div class="card-header">
                 Авторизация
             </div>
-            <c:if test="${error != null}">
-                <div align="center"><c:out value="${error}"/></div>
+            <c:if test="${message != null}">
+                <div class="message"><c:out value="${message}"/></div>
             </c:if>
             <div class="card-body">
                 <form action="<%=request.getContextPath()%>/login.do" method="post">

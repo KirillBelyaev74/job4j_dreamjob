@@ -1,7 +1,7 @@
 package ru.job4j.dream.servlet;
 
 import ru.job4j.dream.model.User;
-import ru.job4j.dream.store.PsqlStore;
+import ru.job4j.dream.store.PsqlUser;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +18,7 @@ public class LoginServlet extends HttpServlet {
             req.setAttribute("error", "Введите все данные!");
             req.getRequestDispatcher("login.jsp").forward(req, res);
         }
-        User user = PsqlStore.instOf().getUser(email, password);
+        User user = PsqlUser.instOf().getUser(email, password);
         if (user != null) {
             req.getSession().setAttribute("user", user);
             res.sendRedirect(req.getContextPath() + "/index.do");

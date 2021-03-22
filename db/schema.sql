@@ -12,6 +12,10 @@ create table photoCandidate(
     candidate_id int references candidates(id),
     pathPhoto text not null);
 
+create table city(
+    candidate_id int references candidates(id),
+    name varchar(20));
+
 create table consumers(
     id serial primary key,
     name varchar(50) not null,
@@ -23,5 +27,7 @@ drop table posts;
 drop table candidates;
 
 drop table photoCandidate;
+
+drop table city;
 
 drop table consumers;

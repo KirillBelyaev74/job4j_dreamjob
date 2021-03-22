@@ -3,7 +3,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import ru.job4j.dream.store.PsqlStore;
+import ru.job4j.dream.store.PsqlCandidate;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -51,7 +51,7 @@ public class UploadServlet extends HttpServlet {
         } catch (FileUploadException e) {
             e.printStackTrace();
         }
-        PsqlStore.instOf().savePhotoCandidate(id, pathPhoto);
+        PsqlCandidate.instOf().savePhotoCandidate(id, pathPhoto);
         resp.sendRedirect(req.getContextPath() + "/candidates.do");
     }
 }

@@ -1,3 +1,6 @@
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.List" %>
+<%@ page import="ru.job4j.dream.model.Candidate" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %>
@@ -20,52 +23,61 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
             crossorigin="anonymous"></script>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <title>Работа мечты</title>
 </head>
 <body>
 <div class="container pt-3">
-    <c:set var="userName" value="${user.name}" />
-    <c:if test="${userName != null}">
-        <p align="right"><a class="nav-link" href="<%=request.getContextPath()%>/leave.do">${user.name} | Выйти</a></p>
-    </c:if>
-    <a href="<c:url value='/index.do'/>">Главная</a>
     <div class="row">
+        <a class="nav-link" href="<c:url value='/index.do'/>">Главная</a>
+        <c:set var="userName" value="${user.name}"/>
+        <c:if test="${userName != null}">
+            <a class="nav-link" href="<%=request.getContextPath()%>/leave.do">${userName} | Выйти</a>
+        </c:if>
         <div class="card" style="width: 100%">
-            <div class="card-header">
-                Кандидаты
-            </div>
+            <div class="card-header">Кандидаты</div>
             <div class="card-body">
                 <table class="table">
                     <thead>
                     <tr>
                         <th scope="col"></th>
-                        <th scope="col">Id</th>
                         <th scope="col">Имя</th>
                         <th scope="col">Фото</th>
+                        <th scope="col">Город</th>
+                        <th scope="col"></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${candidates}" var="candidate">
-                        <tr>
-                            <td><a href='<c:url value="/candidate/edit.jsp?id=${candidate.id}"/>'>
-                                <i class="fa fa-edit mr-3"></i>
-                            </a>
-                            </td>
-                            <td><c:out value="${candidate.id}"/></td>
-                            <td><c:out value="${candidate.name}"/></td>
-                            <td><c:if test="${candidate.photoId == 0}">
-                                <p><a href="<c:url value='/upload?id=${candidate.id}'/>">Загрузить</a></p>
-                            </c:if>
-                                <c:if test="${candidate.photoId != 0}">
-                                    <p><img src="<c:url value='/show?id=${candidate.id}'/>" width="100px" height="100px"/></p>
-                                    <p><a href="<c:url value='/show?id=${candidate.id}'/>">Скачать фото</a></p>
-                                </c:if>
-                            </td>
-                            <td><a href="<c:url value='/deleteCandidate?id=${candidate.id}'/>">Удалить кандидата</a></td>
-                        </tr>
-                    </c:forEach>
+                    <%
+                        Map<Integer, String> cities = (Map<Integer, String>) request.getAttribute("cities");
+                        Map<Integer, String> photoCandidates = (Map<Integer, String>) request.getAttribute("photo");
+                        List<Candidate> candidates = (List<Candidate>) request.getAttribute("candidates");
+                        for (Candidate candidate : candidates) {
+                            int id = candidate.getId();
+                            String photo = photoCandidates.get(id);
+                            String city = cities.get(candidate.getId());
+                    %>
+                    <tr>
+                        <th><a href="<%=request.getContextPath()%>/candidate/edit.jsp?id=<%=id%>&city=<%=city%>"><i
+                                class="fa fa-edit mr-3"></i></a></th>
+                        <th><%=candidate.getName()%>
+                        </th>
+                        <th>
+                            <% if (candidate.getPhotoId() == 0) { %>
+                            <a href="<%=request.getContextPath()%>/upload?id=<%=id%>">Загрузить</a>
+                            <% } else { %>
+                            <p><img src="<%=request.getContextPath()%>/show?photo=<%=photo%>" width="100px"
+                                    height="100px"/></p>
+                            <p><a href="<%=request.getContextPath()%>/show?photo=<%=photo%>"> Скачать фото</a></p>
+                            <% } %>
+                        </th>
+                        <th><%=city%>
+                        </th>
+                        <th><a href="<%=request.getContextPath()%>/deleteCandidate?id=<%=id%>&photo=<%=photo%>">Удалить
+                            кандидата</a></th>
+                    </tr>
+                    <%}%>
                     </tbody>
                 </table>
             </div>

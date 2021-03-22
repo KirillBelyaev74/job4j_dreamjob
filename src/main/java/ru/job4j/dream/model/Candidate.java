@@ -7,35 +7,45 @@ public class Candidate {
     private int id;
     private String name;
     private int photoId;
+    private int cityId;
 
-    public Candidate(int id, String name, int photoId) {
+    public Candidate(int id, String name, int photoId, int cityId) {
         this.id = id;
         this.name = name;
         this.photoId = photoId;
+        this.cityId = cityId;
     }
 
     public int getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public int getPhotoId() {
-        return photoId;
-    }
-
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
+    public int getPhotoId() {
+        return photoId;
+    }
+
     public void setPhotoId(int photoId) {
         this.photoId = photoId;
+    }
+
+    public int getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(int cityId) {
+        this.cityId = cityId;
     }
 
     @Override
@@ -47,19 +57,22 @@ public class Candidate {
             return false;
         }
         Candidate candidate = (Candidate) o;
-        return id == candidate.id && photoId == candidate.photoId && Objects.equals(name, candidate.name);
+        return id == candidate.id && photoId == candidate.photoId &&
+                cityId == candidate.cityId && Objects.equals(name, candidate.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, photoId);
+        return Objects.hash(id, name, photoId, cityId);
     }
 
     @Override
     public String toString() {
-        return "Candidate { " + " id = " + id
+        return "Candidate {"
+                + "id = " + id
                 + ", name = '" + name + '\''
                 + ", photoId = " + photoId
+                + ", city_id = " + cityId
                 + '}';
     }
 }

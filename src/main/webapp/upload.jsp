@@ -14,7 +14,6 @@
 <body>
 <%String id = request.getParameter("id");%>
 <div class="container">
-    <h2></h2>
     <a class="nav-link" href="<%=request.getContextPath()%>/index.do">Главная</a>
     <h3>Сохранение фото кандидата</h3>
     <form action="<%=request.getContextPath()%>/upload?id=<%=id%>" method="post" enctype="multipart/form-data">
