@@ -2,7 +2,8 @@ language: java
 
 jdk: openjdk13
 
-after_success: bash <(curl -s https://codecov.io/bash)
+after_success :
+  - bash <(curl -s https://codecov.io/bash)
 
 notifications:
   email:
