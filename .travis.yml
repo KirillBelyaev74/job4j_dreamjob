@@ -9,8 +9,8 @@ notifications:
   email:
     recipients:
       kirbel74@gmail.com
-    on_success: never # default: change
-    on_failure: always # default: always
+    on_success: never
+    on_failure: always
 
 env:
   global: CODECOV_TOKEN="2eedcc6d-9189-4ae0-bf90-cd5d79e1e048"
