@@ -57,8 +57,8 @@ public class Candidate {
             return false;
         }
         Candidate candidate = (Candidate) o;
-        return id == candidate.id && photoId == candidate.photoId &&
-                cityId == candidate.cityId && Objects.equals(name, candidate.name);
+        return id == candidate.id && photoId == candidate.photoId
+                && cityId == candidate.cityId && Objects.equals(name, candidate.name);
     }
 
     @Override
@@ -68,7 +68,7 @@ public class Candidate {
 
     @Override
     public String toString() {
-        return "Candidate {"
+        return "Candidate { "
                 + "id = " + id
                 + ", name = '" + name + '\''
                 + ", photoId = " + photoId

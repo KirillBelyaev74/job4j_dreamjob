@@ -5,10 +5,11 @@ import org.junit.runner.RunWith;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
-import ru.job4j.dream.store.PsqlStore;
-import ru.job4j.dream.store.Store;
+import ru.job4j.dream.store.PsqlCandidate;
+import ru.job4j.dream.store.StoreCandidate;
 import ru.job4j.dream.store.ValidateStore;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,16 +21,16 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(PsqlStore.class)
+@PrepareForTest(PsqlCandidate.class)
 public class CandidateServletTest {
 
     @Test
-    public void whenCreateCandidate() throws IOException {
-        Store store = new ValidateStore();
-        PowerMockito.mockStatic(PsqlStore.class);
+    public void whenCreateCandidate() throws IOException, ServletException {
+        StoreCandidate store = new ValidateStore();
+        PowerMockito.mockStatic(PsqlCandidate.class);
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpServletResponse response = mock(HttpServletResponse.class);
-        when(PsqlStore.instOf()).thenReturn(store);
+        when(PsqlCandidate.instOf()).thenReturn(store);
         when(request.getParameter("id")).thenReturn("0");
         when(request.getParameter("name")).thenReturn("Kirill");
         new CandidateServlet().doPost(request, response);

@@ -2,11 +2,10 @@ package ru.job4j.dream.store;
 
 import ru.job4j.dream.model.Candidate;
 import ru.job4j.dream.model.Post;
-import ru.job4j.dream.model.User;
 
 import java.util.*;
 
-public class ValidateStore implements Store {
+public class ValidateStore implements StoreCandidate, StorePost {
 
     private final Map<Integer, Post> posts = new HashMap<>();
     private final Map<Integer, Candidate> candidates = new HashMap<>();
@@ -25,13 +24,9 @@ public class ValidateStore implements Store {
     }
 
     @Override
-    public Post getPostById(String stringId) {
-        return null;
-    }
-
-    @Override
-    public void deletePost(String stringId) {
-
+    public void saveCandidates(Candidate candidate) {
+        candidate.setId(idCandidate++);
+        candidates.put(candidate.getId(), candidate);
     }
 
     @Override
@@ -40,9 +35,13 @@ public class ValidateStore implements Store {
     }
 
     @Override
-    public void saveCandidates(Candidate candidate) {
-        candidate.setId(idCandidate++);
-        candidates.put(candidate.getId(), candidate);
+    public Post getPostById(String stringId) {
+        return null;
+    }
+
+    @Override
+    public void deletePost(String stringId) {
+
     }
 
     @Override
@@ -61,27 +60,22 @@ public class ValidateStore implements Store {
     }
 
     @Override
-    public Map<Integer, String> findAllPhotoCandidates() {
+    public Map<Integer, String> findAllPhotoOfTheCandidates() {
         return null;
     }
 
     @Override
-    public String getPhotoCandidate(String stringId) {
+    public void deletePhotoAndCityOfCandidate(String stringId) {
+
+    }
+
+    @Override
+    public void saveCityOfCandidate(String stringId, String nameCity) {
+
+    }
+
+    @Override
+    public Map<Integer, String> findAllCityOfCandidates() {
         return null;
-    }
-
-    @Override
-    public User addUser(User user) {
-        return user;
-    }
-
-    @Override
-    public User getUser(String email, String password) {
-        return null;
-    }
-
-    @Override
-    public boolean checkLiveUser(String email) {
-        return false;
     }
 }

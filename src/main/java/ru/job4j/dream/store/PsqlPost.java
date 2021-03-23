@@ -11,7 +11,9 @@ import java.util.List;
 
 public class PsqlPost extends DataBasePool implements StorePost {
 
-    public PsqlPost(){}
+    public PsqlPost() {
+
+    }
 
     private final static Logger LOGGER = Logger.getLogger(PsqlPost.class);
 

@@ -10,7 +10,9 @@ import java.sql.SQLException;
 
 public class PsqlUser extends DataBasePool implements StoreUser {
 
-    public PsqlUser(){}
+    public PsqlUser() {
+
+    }
 
     private final static Logger LOGGER = Logger.getLogger(PsqlUser.class);
 

@@ -6,9 +6,11 @@ import ru.job4j.dream.model.Candidate;
 import java.sql.*;
 import java.util.*;
 
-public class PsqlCandidate extends DataBasePool implements StoreCandidate{
+public class PsqlCandidate extends DataBasePool implements StoreCandidate {
 
-    public PsqlCandidate(){}
+    public PsqlCandidate() {
+
+    }
 
     private final static Logger LOGGER = Logger.getLogger(PsqlCandidate.class);
 
@@ -26,9 +28,9 @@ public class PsqlCandidate extends DataBasePool implements StoreCandidate{
         try (Connection connection = pool.getConnection();
              Statement statement = connection.createStatement()) {
             try (ResultSet resultSet = statement.executeQuery(
-                    "select c.id, c.name, p.candidate_id, t.candidate_id from candidates c " +
-                            "left join photocandidate p on (c.id = p.candidate_id) " +
-                            "left join city t on (c.id = t.candidate_id)")) {
+                    "select c.id, c.name, p.candidate_id, t.candidate_id from candidates c "
+                            + "left join photocandidate p on (c.id = p.candidate_id) "
+                            + "left join city t on (c.id = t.candidate_id) order by c.id")) {
                 while (resultSet.next()) {
                     candidates.add(
                             new Candidate(
@@ -94,10 +96,10 @@ public class PsqlCandidate extends DataBasePool implements StoreCandidate{
         Candidate candidate = null;
         try (Connection connection = pool.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
-                     "select c.id, c.name, p.candidate_id, t.candidate_id from candidates c " +
-                             "left join photocandidate p on (c.id = p.candidate_id) " +
-                             "left join city t on (c.id = t.candidate_id) " +
-                             "where c.id = ?")) {
+                     "select c.id, c.name, p.candidate_id, t.candidate_id from candidates c "
+                             + "left join photocandidate p on (c.id = p.candidate_id) "
+                             + "left join city t on (c.id = t.candidate_id) "
+                             + "where c.id = ?")) {
             preparedStatement.setInt(1, id);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
@@ -182,7 +184,7 @@ public class PsqlCandidate extends DataBasePool implements StoreCandidate{
         Map<Integer, String> photo = new HashMap<>();
         try (Connection connection = pool.getConnection();
              Statement statement = connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery("select * from photoCandidate");
+            ResultSet resultSet = statement.executeQuery("select * from photoCandidate order by candidate_id");
             while (resultSet.next()) {
                 photo.put(resultSet.getInt("candidate_id"), resultSet.getString("pathPhoto"));
             }
@@ -216,7 +218,7 @@ public class PsqlCandidate extends DataBasePool implements StoreCandidate{
         Map<Integer, String> cities = new HashMap<>();
         try (Connection connection = pool.getConnection();
              Statement statement = connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery("select * from city");
+            ResultSet resultSet = statement.executeQuery("select * from city order by candidate_id");
             while (resultSet.next()) {
                 cities.put(resultSet.getInt("candidate_id"), resultSet.getString("name"));
             }
