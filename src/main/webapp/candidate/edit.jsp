@@ -53,7 +53,7 @@
                         <label>Город</label>
                         <input type="text" class="form-control" name="city" id="city" value="<%=city%>">
                     </div>
-                    <button type="submit" class="btn btn-primary" onclick="validateCandidate()">Сохранить</button>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
                 </form>
             </div>
         </div>
