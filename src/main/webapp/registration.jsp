@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %>
 <!doctype html>
-<html lang="en">
+<html lang="ru">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -61,7 +61,7 @@
                     </div>
                     <div class="form-group">
                         <label>Пароль</label>
-                        <input type="text" class="form-control" name="password" id="password">
+                        <input type="password" class="form-control" name="password" id="password">
                     </div>
                     <button type="submit" class="btn btn-primary" onclick="validateUser()">Войти</button>
                 </form>

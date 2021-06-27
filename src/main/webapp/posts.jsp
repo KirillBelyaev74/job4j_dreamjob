@@ -41,6 +41,7 @@
                         <th scope="col">Название вакансии</th>
                         <th scope="col">Описание</th>
                         <th scope="col">Дата создания</th>
+                        <th scope="col"></th>
                     </tr>
                     </thead>
                     <tbody>

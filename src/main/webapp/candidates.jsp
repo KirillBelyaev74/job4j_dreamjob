@@ -67,7 +67,7 @@
                             <% if (candidate.getPhotoId() == 0) { %>
                             <a href="<%=request.getContextPath()%>/upload?id=<%=id%>">Загрузить</a>
                             <% } else { %>
-                            <p><img src="<%=request.getContextPath()%>/show?photo=<%=photo%>" width="100px"
+                            <p><img src="<%=request.getContextPath()%>/show?photo=<%=photo%>" width="80px"
                                     height="100px"/></p>
                             <p><a href="<%=request.getContextPath()%>/show?photo=<%=photo%>"> Скачать фото</a></p>
                             <% } %>

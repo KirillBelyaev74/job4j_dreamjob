@@ -44,10 +44,6 @@
     <servlet-name>LeaveServlet</servlet-name>
     <servlet-class>ru.job4j.dream.servlet.LeaveServlet</servlet-class>
   </servlet>
-  <servlet>
-    <servlet-name>CitiesServlet</servlet-name>
-    <servlet-class>ru.job4j.dream.servlet.CitiesServlet</servlet-class>
-  </servlet>
 
   <servlet-mapping>
     <servlet-name>PostServlet</servlet-name>
@@ -88,10 +84,6 @@
   <servlet-mapping>
     <servlet-name>LeaveServlet</servlet-name>
     <url-pattern>/leave.do</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>CitiesServlet</servlet-name>
-    <url-pattern>/cities</url-pattern>
   </servlet-mapping>
 
   <filter>
