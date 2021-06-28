@@ -13,8 +13,10 @@
 - PostgresSQL
 - JDBC
 - Apache Tomcat
+- Apache FileUpload
 - Servlet
-- JS / Jquery
+- JSP / CSS / JS / JSTL / HTML
+- JUnit
 - Ajax
 - Log4j
 - Singleton (On Demand Holder Idom)
